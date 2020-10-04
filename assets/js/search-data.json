@@ -22,6 +22,17 @@
         
     
   
+    
+        ,"post2": {
+            "title": "SINDy",
+            "content": "SINDy is an algorithm to discover governing dynamical equations given a time series x(t). The main difference compared to a regression problem is the computation of time derivative dx/dt before applying regression with some basis. The algorithm is composed of: . Time derivative: Perhaps the trickiest part, especially for noisy time series although one can use total variation regularized derivatives for such cases as in here | Basis: Some non-linear basis of the original time series that could be polynomial, trigonometric (see the paper above) | Regularized linear regression: Apply LASSO and/or sequential thresholding least squares. | . Paper: https://www.pnas.org/content/113/15/3932 . SINDy can also be used for forecasting, which is trivial once one discovers the dynamical equations. . Regression on differential equations . Create synthetic dataset . Solve the ODE: . $$ begin{align} frac{dx_1}{dt} &amp;= -x_1^3 - x_2 frac{dx_2}{dt} &amp;= x_1 - x_2^3 end{align} $$ Plot the solutions . Compute the time derivative. . x1 = sol_new[:,0] x2 = sol_new[:,1] . Actual time derivatives . dx1dt = -x1**3 - x2 dx2dt = x1 - x2**3 . Numerically computed derivatives from data . Construct a basis: polynomial (or trig) . Feature names: [&#39;1&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x1^2&#39;, &#39;x1 x2&#39;, &#39;x2^2&#39;, &#39;x1^3&#39;, &#39;x1^2 x2&#39;, &#39;x1 x2^2&#39;, &#39;x2^3&#39;] Feature array shape: (1001, 10) . Regression using LASSO . (or Ridge/OLS with sequential thresholding) . LASSO does regularized linear regression with L1-norm. alpha is a hyperparameter. . low alpha -&gt; OLS | high alpha -&gt; most features zero | . from sklearn.linear_model import Lasso mod = Lasso(alpha=0.0001) mod . Lasso(alpha=0.0001) . dx1dt . Identified ODE: . $dx_1/dt sim -x_2 - x_1^3$ . with minor contributions from other terms that could be gotten rid of by applying a threshold . dx1_thr = fit_dx1[fit_dx1.columns[fit_dx1.abs().max() &gt; 0.1]] dx1_thr . x2 x1^3 . 0 -0.998524 | -0.502025 | . dx2/dt . Identified ODE: . $dx_2/dt sim x_1 - x_2^3$ . with minor contributions from other terms that could be gotten rid of by applying a threshold . 2. Forecasting using SINDy . Now that we have discovered the differential equations, we can use the ODE solver to forecast the future. . def fun_forecast(y, t): x1, x2 = y dxdt = [-0.5*(x1**3) - 0.9985*x2, 0.995*x1 - 0.8269*x2**3] return dxdt t_forecast = np.linspace(10, 15, 500) y0 = [x1[-1], x2[-1]] sol_forecast = odeint(fun_forecast, y0, t_forecast) .",
+            "url": "https://fnauman.github.io/ds-blog/differential%20equations/machine%20learning/2019/09/10/sindy-basic.html",
+            "relUrl": "/differential%20equations/machine%20learning/2019/09/10/sindy-basic.html",
+            "date": " • Sep 10, 2019"
+        }
+        
+    
+  
 
   
   
