@@ -194,18 +194,12 @@ where $\ell$ represents the smoothing length.</p>
 <p>Gaussian Processes are not easy to interpret since they do not use explicit features. The computational complexity of inverting the covariance matrix inversion is $n^3$ but this has been addressed by more recent approaches.</p>
 <p>References:</p>
 <ol>
-<li>Self-contained discussion with python code: <a href="https://github.com/fonnesbeck/Bayes_Computing_Course/blob/master/notebooks/Section5_1-Gaussian_Processes.ipynb">https://github.com/fonnesbeck/Bayes_Computing_Course/blob/master/notebooks/Section5_1-Gaussian_Processes.ipynb</a>
-</li>
-<li>scikit-learn: <a href="https://scikit-learn.org/stable/modules/gaussian_process.html#gp-kernels">https://scikit-learn.org/stable/modules/gaussian_process.html#gp-kernels</a>
-</li>
-<li>Application to dynamical systems: <a href="https://www.youtube.com/watch?list=PLFfvLE9TGnegjHFetV-zjPztaM_1UQk9B&amp;v=BepKfyGbOM4&amp;feature=emb_logo&amp;ab_channel=WilWard">https://www.youtube.com/watch?list=PLFfvLE9TGnegjHFetV-zjPztaM_1UQk9B&amp;v=BepKfyGbOM4&amp;feature=emb_logo&amp;ab_channel=WilWard</a>
-</li>
-<li>Broad overview: <a href="https://www.youtube.com/watch?v=U85XFCt3Lak&amp;ab_channel=MLSSAfrica">https://www.youtube.com/watch?v=U85XFCt3Lak&amp;ab_channel=MLSSAfrica</a>
-</li>
-<li>pyro: <a href="https://pyro.ai/examples/gp.html">https://pyro.ai/examples/gp.html</a>
-</li>
-<li>GPy: <a href="https://github.com/SheffieldML/GPy">https://github.com/SheffieldML/GPy</a>
-</li>
+<li><a href="https://github.com/fonnesbeck/Bayes_Computing_Course/blob/master/notebooks/Section5_1-Gaussian_Processes.ipynb">Self-contained discussion with python code</a></li>
+<li><a href="https://scikit-learn.org/stable/modules/gaussian_process.html#gp-kernels">scikit-learn</a></li>
+<li><a href="https://www.youtube.com/watch?list=PLFfvLE9TGnegjHFetV-zjPztaM_1UQk9B&amp;v=BepKfyGbOM4&amp;feature=emb_logo&amp;ab_channel=WilWard">Application to dynamical systems</a></li>
+<li><a href="https://www.youtube.com/watch?v=U85XFCt3Lak&amp;ab_channel=MLSSAfrica">GP summer school</a></li>
+<li><a href="https://pyro.ai/examples/gp.html">pyro</a></li>
+<li><a href="https://github.com/SheffieldML/GPy">GPy</a></li>
 </ol>
 
 </div>
@@ -231,6 +225,23 @@ where $\ell$ represents the smoothing length.</p>
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>wget https://github.com/fnauman/timeseries/blob/master/candydata/candy_production.csv -O candy_production.csv
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
