@@ -142,8 +142,8 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#Construct-a-basis:-polynomial-(or-trig)">Construct a basis: polynomial (or trig) </a></li>
 <li class="toc-entry toc-h2"><a href="#Regression-using-LASSO">Regression using LASSO </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#dx1dt">dx1dt </a></li>
-<li class="toc-entry toc-h3"><a href="#dx2/dt">dx2/dt </a></li>
+<li class="toc-entry toc-h3"><a href="#$dx_1-/-dt$">$dx_1 / dt$ </a></li>
+<li class="toc-entry toc-h3"><a href="#$dx_2-/-dt$">$dx_2 / dt$ </a></li>
 </ul>
 </li>
 </ul>
@@ -161,15 +161,25 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>SINDy is an algorithm to discover governing dynamical equations given a time series <strong>x(t)</strong>. The main difference compared to a regression problem is the computation of time derivative <strong>dx/dt</strong> before applying regression with some basis. The algorithm is composed of:</p>
+<p>Sparse Identification of Nonlinear Dynamical Systems (SINDy) is an algorithm to discover governing dynamical equations for time series ${\bf x}(t)$. The key idea is to construct a differential equation:</p>
+$$ \frac{d{\bf x}}{d t} = \Theta({\bf x}^T) {\bf x}$$<p>,</p>
+<p>where the time derivative is computed from the time series data and $\Theta({\bf x})$ is a non-linear basis.</p>
+<p>Summary:</p>
 <ul>
 <li>Time derivative: Perhaps the trickiest part, especially for noisy time series although one can use total variation regularized derivatives for such cases as in <a href="https://github.com/stur86/tvregdiff">here</a>
 </li>
-<li>Basis: Some non-linear basis of the original time series that could be polynomial, trigonometric (see the paper above)</li>
-<li>Regularized linear regression: Apply LASSO and/or sequential thresholding least squares.</li>
+<li>Basis: Some non-linear basis constructed from the time series data, for example, polynomial basis.</li>
+<li>Regularized linear regression: Apply Lasso/Ridge with one step or sequential thresholding least squares.</li>
 </ul>
 <p>Paper: <a href="https://www.pnas.org/content/113/15/3932">https://www.pnas.org/content/113/15/3932</a></p>
-<p>SINDy can also be used for <strong>forecasting</strong>, which is trivial once one discovers the dynamical equations.</p>
+<p>Once the underlying dynamical equations are discovered, <strong>forecasting</strong> becomes a lot easier.</p>
+<p><strong>Extensions</strong>:</p>
+<p>Knowing the right coordinates and basis functions to use is often difficult. The most interesting extension of SINDy so far has been to use latent basis / coordinates instead of physical space basis. In latent space,</p>
+<p>
+$$ {\bf x} \longrightarrow {\bf z} = Encoder({\bf x}).$$
+</p>
+<p>In the latent coordinates ${\bf z}$, a non-linear basis is then constructed to do linear regression.</p>
+<p>Paper: <a href="https://www.pnas.org/content/116/45/22445">https://www.pnas.org/content/116/45/22445</a></p>
 
 </div>
 </div>
@@ -407,8 +417,8 @@ Feature array shape: (1001, 10)
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="dx1dt">
-<a class="anchor" href="#dx1dt" aria-hidden="true"><span class="octicon octicon-link"></span></a>dx1dt<a class="anchor-link" href="#dx1dt"> </a>
+<h3 id="$dx_1-/-dt$">
+<a class="anchor" href="#%24dx_1-/-dt%24" aria-hidden="true"><span class="octicon octicon-link"></span></a>$dx_1 / dt$<a class="anchor-link" href="#%24dx_1-/-dt%24"> </a>
 </h3>
 </div>
 </div>
@@ -512,8 +522,8 @@ Feature array shape: (1001, 10)
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="dx2/dt">
-<a class="anchor" href="#dx2/dt" aria-hidden="true"><span class="octicon octicon-link"></span></a>dx2/dt<a class="anchor-link" href="#dx2/dt"> </a>
+<h3 id="$dx_2-/-dt$">
+<a class="anchor" href="#%24dx_2-/-dt%24" aria-hidden="true"><span class="octicon octicon-link"></span></a>$dx_2 / dt$<a class="anchor-link" href="#%24dx_2-/-dt%24"> </a>
 </h3>
 </div>
 </div>
