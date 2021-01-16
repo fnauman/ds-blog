@@ -170,7 +170,7 @@ $$
 $$
 where $\ell$ represents the smoothing length.</p>
 <p><strong>Difference between GPs and Naive Bayes</strong>:</p>
-<p>Let's take the example of polynomial regression. Naive Bayes takes the 'weight-space' approach just like OLS, $f(x) = w^T x + b$: the goal is to find coefficients of polynomial terms $w^T$ such that the negative log likelihood is minimized. GPs take a 'function-space' approach to this where the goal is to find the optimal $g(x) = w^T * x$: the advantage is that an explicit polynomial basis is not required, only the relationship among samples, for example, a smooth kernel like the Radial Basis Function.</p>
+<p>Naive Bayes takes the 'weight-space' approach similar to Ordinary Least Squares, $f(x) = w^T x + b$: the goal is to find the coefficients of the basis (polynomial, for example) $w^T$ such that the negative log likelihood is minimized. GPs take a 'function-space' approach where the goal is to find the optimal $g(x) = w^T * x$: the advantage being that an explicit basis (polynomial or otherwise) is not required anymore.</p>
 <p>The advantages of GPs are:</p>
 <ol>
 <li>
