@@ -164,12 +164,12 @@ window.onload = wrap_img;
 <p>Sparse Identification of Nonlinear Dynamical Systems (SINDy) is an algorithm to discover governing dynamical equations for time series ${\bf x}(t)$. The key idea is to construct a differential equation:</p>
 $$ \frac{d{\bf x}}{d t} = \Theta({\bf x}^T) {\bf x}$$<p>,</p>
 <p>where the time derivative is computed from the time series data and $\Theta({\bf x})$ is a non-linear basis.</p>
-<p>Summary:</p>
+<p>Steps:</p>
 <ul>
-<li>Time derivative: Perhaps the trickiest part, especially for noisy time series although one can use total variation regularized derivatives for such cases as in <a href="https://github.com/stur86/tvregdiff">here</a>
+<li>Compute time derivative: Perhaps the trickiest part, especially for noisy time series although one can use total variation regularized derivatives for such cases as in <a href="https://github.com/stur86/tvregdiff">here</a>
 </li>
-<li>Basis: Some non-linear basis constructed from the time series data, for example, polynomial basis.</li>
-<li>Regularized linear regression: Apply Lasso/Ridge with one step or sequential thresholding least squares.</li>
+<li>Choose basis: Some non-linear basis constructed from the time series data, for example, polynomial basis.</li>
+<li>Apply regularized linear regression: Apply Lasso/Ridge with one step or sequential thresholding least squares.</li>
 </ul>
 <p>Paper: <a href="https://www.pnas.org/content/113/15/3932">https://www.pnas.org/content/113/15/3932</a></p>
 <p>Once the underlying dynamical equations are discovered, <strong>forecasting</strong> becomes a lot easier.</p>
@@ -178,7 +178,7 @@ $$ \frac{d{\bf x}}{d t} = \Theta({\bf x}^T) {\bf x}$$<p>,</p>
 <p>
 $$ {\bf x} \longrightarrow {\bf z} = Encoder({\bf x}).$$
 </p>
-<p>In the latent coordinates ${\bf z}$, a non-linear basis is then constructed to do linear regression.</p>
+<p>A non-linear basis in ${\bf z}$ is used to perform SINDy. The full cost function also takes into account the physical space SINDy expression. For more details, see the paper:</p>
 <p>Paper: <a href="https://www.pnas.org/content/116/45/22445">https://www.pnas.org/content/116/45/22445</a></p>
 
 </div>
