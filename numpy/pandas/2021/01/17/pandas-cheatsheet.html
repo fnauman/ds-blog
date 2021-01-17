@@ -93,7 +93,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      3 min read
     
 </span></p>
 
@@ -135,9 +135,12 @@ window.onload = wrap_img;
 
   <div class="post-content e-content" itemprop="articleBody">
     <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Configuration">Configuration </a></li>
 <li class="toc-entry toc-h2"><a href="#Re-order-columns">Re-order columns </a></li>
+<li class="toc-entry toc-h2"><a href="#Merge-/-Join">Merge / Join </a></li>
 <li class="toc-entry toc-h2"><a href="#Assign:-Create-new-columns-easily-from-existing-columns">Assign: Create new columns easily from existing columns </a></li>
 <li class="toc-entry toc-h2"><a href="#Tall-to-Wide-form:-pd.pivot">Tall to Wide form: pd.pivot </a></li>
+<li class="toc-entry toc-h2"><a href="#Multi-index">Multi-index </a></li>
 <li class="toc-entry toc-h2"><a href="#Wide-to-tall:-pd.melt">Wide to tall: pd.melt </a></li>
 <li class="toc-entry toc-h2"><a href="#Create-a-binary-column-based-on-two-separate-columns">Create a binary column based on two separate columns </a></li>
 <li class="toc-entry toc-h2"><a href="#One-Hot-Encoding:-custom-name-for-the-columns">One Hot Encoding: custom name for the columns </a></li>
@@ -161,15 +164,50 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>Pandas is perhaps the most widely used python library for analyzing tabular data. It is based on a numpy and enables fast data analysis by using vectorized operations. Below, I highlight a number of commonly used pandas features that are useful when doing basic common data cleaning / exploration. I want to write about a few gotchas in pandas in addition to the commonly used commands. For example, integer dtype columns containing <code>NaNs</code> are always converted to <code>float</code> dtype. Another gotcha relates to <code>replace</code>: <code>inplace=True</code> does not always work with pandas replace function.</p>
 <p>Good resources:</p>
 <ul>
+<li><a href="https://www.enthought.com/wp-content/uploads/Enthought-Python-Pandas-Cheat-Sheets-1-8-v1.0.2.pdf">Amazing visual cheatsheet</a></li>
 <li><a href="https://realpython.com/python-data-cleaning-numpy-pandas/?s=09">Real python</a></li>
-<li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html">Pandas Docs</a></li>
+<li><a href="https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.apply.html">Pandas docs</a></li>
 </ul>
 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Configuration">
+<a class="anchor" href="#Configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration<a class="anchor-link" href="#Configuration"> </a>
+</h2>
+<p>More options: <a href="https://pandas.pydata.org/pandas-docs/stable/user_guide/options.html">docs</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">plotting</span><span class="o">.</span><span class="n">backend</span> <span class="o">=</span> <span class="s1">'plotly'</span>
+
+<span class="c1"># Maximum default rows / columns to display</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"max_rows"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"max_columns"</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">"max_info_columns"</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span> <span class="c1"># df.info() shows info on these many columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -187,6 +225,34 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">FIRST_COLS</span> <span class="o">+</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">REMAINING_COLS</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Merge-/-Join">
+<a class="anchor" href="#Merge-/-Join" aria-hidden="true"><span class="octicon octicon-link"></span></a>Merge / Join<a class="anchor-link" href="#Merge-/-Join"> </a>
+</h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">df1</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span>
+<span class="p">)</span>
 </pre></div>
 
     </div>
@@ -253,6 +319,34 @@ window.onload = wrap_img;
                          <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">'ID'</span><span class="p">,</span> <span class="s1">'School'</span><span class="p">],</span> <span class="c1"># Student ID and school</span>
                          <span class="n">columns</span><span class="o">=</span><span class="s1">'Subjects'</span><span class="p">,</span> <span class="c1"># Name of the subject</span>
                          <span class="n">aggfunc</span><span class="o">=</span><span class="s1">'last'</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multi-index">
+<a class="anchor" href="#Multi-index" aria-hidden="true"><span class="octicon octicon-link"></span></a>Multi-index<a class="anchor-link" href="#Multi-index"> </a>
+</h2>
+<p>pivot / pivot_table return a multi-index object that has levels of indices.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">get_level_values</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
     </div>
