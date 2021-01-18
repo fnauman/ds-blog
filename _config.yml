@@ -6,7 +6,7 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: data science blog
+title: Machine learning and ML-physics
 description: Blog posts about machine learning and physics-machine learning interface.
 github_username: fnauman
 # you can comment the below line out if your repo name is not different than your baseurl
